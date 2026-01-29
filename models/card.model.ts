@@ -1,21 +1,20 @@
 import { models, model, Schema, Model } from "mongoose";
 
 type Card = {
-  title: string;
-  price: string;
+  foodName: string;
+  foodPrice: string;
   product: string;
-  poster_path: string;
+  foodImage: string;
 };
 
 const CardSchema = new Schema<Card>(
   {
-    title: { type: String, required: true },
+    foodName: { type: String, required: true },
     product: [{ type: String, required: true }],
-    price: { type: String, required: true },
-    poster_path: { type: String, required: true },
+    foodPrice: { type: String, required: true },
+    foodImage: { type: String},
   },
   { timestamps: true },
 );
 
-export const CardModel: Model<Card> =
-  models["Cards"] || model("Cards", CardSchema);
+export const CardModel: Model<Card> =models["Cards"] || model("Cards", CardSchema);

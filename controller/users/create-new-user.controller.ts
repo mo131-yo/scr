@@ -1,9 +1,9 @@
 import {Request, Response} from "express";
-import { UserModel } from "../../../user.schema";
+import { UserModel } from "../../schema/user.schema";
 
 export const createNewUser = async (req: Request, res: Response) => {
     try{
-        await UserModel.create();
+        await UserModel.create;
     }catch(error){
         console.error(error);
     }

@@ -1,17 +1,18 @@
-import cors from "cors";
-import { configDotenv } from "dotenv";
-import express, { Application , Request, Response, Router} from "express";
-import connectToMongoDB from "./mongoDb";
-import { Schema } from "mongoose";
-import { userRouter } from "./router";
-// import { foodRouter } from "./router/food.router";
+// import cors from "cors";
+// import { configDotenv } from "dotenv";
+// import express, { Application , Request, Response, Router} from "express";
+// import connectToMongoDB from "./mongoDb";
+// import { Schema } from "mongoose";
+// import { foodCardRouter, foodRouter, userRouter } from "./router";
+// import { UserModel } from "./schema/user.schema";
+// // import { foodRouter } from "./router/food.router";
 
-configDotenv();
+// configDotenv();
 
-const app: Application= express()
+// const app: Application= express()
 
-app.use(express.json());
-app.use(cors());
+// app.use(express.json());
+// app.use(cors());
 
 // app.post("/discover", async ( req: Request, res: Response)=>{
 //     res.status(200).send(req.body);
@@ -164,6 +165,51 @@ app.use(cors());
 //   console.log(`Server is running on port ${port}`);
 // });
 
+import cors from "cors";
+import { configDotenv } from "dotenv";
+import express, { Application , Request, Response, Router} from "express";
+import connectToMongoDB from "./mongoDb";
+import { Schema } from "mongoose";
+import { foodCardRouter, foodRouter, userRouter } from "./router";
+import { UserModel } from "./schema/user.schema";
+import bcrypt from "bcrypt";
+
+configDotenv();
+
+const app: Application= express()
+
+app.use(express.json());
+app.use(cors());
+
+
+app.post("/create-user", async (req: Request, res: Response)=>{
+    const {name, email, password} = req.body;
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    const newUser = await UserModel.create;
+
+    res.status(200).send({message: "user amjilttai uuslee", data: newUser});
+});
+
+const prompt = process.env.PORT || 8000;
+app.get("/get-users", async (req: Request, res: Response)=>{
+    const users =await UserModel.find;
+    res.status(200).send({message:"users avlaa", data: users});
+})
+
 app.use('/users', userRouter);
+
+app.use('/cards', foodCardRouter);
+
+app.use("/foods", foodRouter);
+app.use("/foods-card", foodCardRouter)
+
+
+app.listen(prompt, async()=>{
+    await connectToMongoDB()
+    console.log(`server is running on port ${prompt}`);
+})
 
 app.listen(8000, () => console.log("http://localhost:8000"));
