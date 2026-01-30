@@ -195,7 +195,7 @@ app.post("/create-user", async (req: Request, res: Response)=>{
 
 const prompt = process.env.PORT || 8000;
 app.get("/get-users", async (req: Request, res: Response)=>{
-    const users =await UserModel.find;
+    const users = await UserModel.find;
     res.status(200).send({message:"users avlaa", data: users});
 })
 

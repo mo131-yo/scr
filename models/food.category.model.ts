@@ -14,8 +14,6 @@ const FoodCategorySchema = new Schema<FoodCategory>({
     categoryName: { type: String, required: true, unique: true},
     name: { type: String, required: true},
     description: { type: String, required: true},
-    createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now },
 },
 {timestamps: true},
 )

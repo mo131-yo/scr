@@ -6,7 +6,6 @@ type Food = {
   price: string;
   image: string;
   category: ObjectId
-  poster_path: string;  
 };
 
 const FoodSchema = new Schema<Food>(
@@ -16,7 +15,6 @@ const FoodSchema = new Schema<Food>(
     price: { type: String, required: true },
     image: { type: String, required: true },
     category: {type: Schema.Types.ObjectId, ref: "FoodCategory", required: true},
-    poster_path: { type: String, required: true },
   },
   { timestamps: true },
 );

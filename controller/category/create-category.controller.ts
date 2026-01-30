@@ -1,7 +1,7 @@
 import { Request, Response} from "express";
 import { FoodModel} from "../../models/food.model";
 
-export const createFoodCard = async ( req: Request, res: Response)=>{
+export const createFoodCategory = async ( req: Request, res: Response)=>{
     try{
         const newFood = await FoodModel.find().sort ({createdAt: -1}).limit(10);
         res.status(200).json(newFood);

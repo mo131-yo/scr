@@ -1,10 +1,17 @@
-import { Request, Response} from "express";
-import { FoodModel} from "../../models/food.model";
+import { Request, Response } from "express";
 
-export const createFoodCard = async ( req: Request, res: Response)=>{
+export const getNewFoodCard = async (req: Request, res: Response) => {
     try{
-        const newFood = await FoodModel.find().sort ({createdAt: -1}).limit(10);
-        res.status(200).json(newFood);
+        res.status(200).json(req.query)    
+    }catch(error){
+        console.error(error);
+         res.status(500).json({message: "Aldaa garlaa"})
+    }
+}
+
+export const getFoodCardItems = async ( req: Request, res: Response)=>{
+    try{
+        res.status(200).json(req.body)
     }catch(error){
         console.error(error);
         res.status(500).json({message: "Aldaa garlaa"})
